@@ -46,14 +46,14 @@
     "ignore": []
   },
   "dependencies": {
-    "@tira/tira-clients": "^1.0.4",
-    "@tira/tira-frontend-server": "^1.0.10",
+    "@tira/tira-clients": "^1.0.5",
+    "@tira/tira-frontend-server": "^1.0.11",
     "cross-env": "^5.2.0",
     "git-revision-webpack-plugin": "^3.0.3"
   },
   "devDependencies": {
-    "@tira/tira-cli": "^1.0.24",
-    "@tira/tira-deps-dev": "^1.0.2",
+    "@tira/tira-cli": "^1.0.25",
+    "@tira/tira-deps-dev": "^1.0.3",
     "@xbdtb/tsc-watch": "^1.0.27",
     "classnames": "^2.2.6",
     "eslint": "^5.5.0",
@@ -88,5 +88,5 @@
   ],
   "author": "xbdtb@163.com",
   "license": "MIT",
-  "version": "1.0.26"
+  "version": "1.0.27"
 }

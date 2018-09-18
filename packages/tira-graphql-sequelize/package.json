@@ -1,6 +1,6 @@
 {
   "name": "@tira/tira-graphql-sequelize",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "description": "packages/tira-graphql-sequelize",
   "main": "dist/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "@tira/tira-graphql": "^1.0.5",
+    "@tira/tira-graphql": "^1.0.6",
     "@types/lodash": "^4.14.116",
     "graphql-relay": "^0.5.5",
     "graphql-sequelize": "^9.0.1"

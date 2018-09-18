@@ -1,6 +1,6 @@
 {
   "name": "@tira/tira-frontend-server",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "packages/tira-graphql-server",
   "main": "dist/index.js",
   "scripts": {
@@ -12,8 +12,8 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "@tira/tira-deps-dev": "^1.0.2",
-    "@tira/tira-errors": "^1.0.3",
+    "@tira/tira-deps-dev": "^1.0.3",
+    "@tira/tira-errors": "^1.0.4",
     "body-parser": "^1.18.3",
     "compression": "^1.7.3",
     "connect-redis": "^3.3.3",
