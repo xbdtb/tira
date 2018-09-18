@@ -1,0 +1,40 @@
+{
+  "name": "@tira/tira-cli",
+  "version": "1.0.24",
+  "description": "packages/tira-cli",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "tira": "./.bin/tira.js"
+  },
+  "scripts": {
+    "prepare": "npm run clean && npm run compile",
+    "clean": "rimraf dist",
+    "compile": "tsc",
+    "watch-tsc": "tsc -w",
+    "link": "npm link",
+    "unlink": "npm unlink"
+  },
+  "dependencies": {
+    "@tira/tira-graphql": "^1.0.5",
+    "@tira/tira-project-template": "^1.0.21",
+    "commander": "^2.18.0"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "tira",
+    "graphql",
+    "typescript"
+  ],
+  "author": "xbdtb@163.com",
+  "license": "MIT",
+  "homepage": "https://github.com/xbdtb/tira#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xbdtb/tira/tree/master/packages/tira-cli"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "packages": ["packages/*", "packages/tira-project-template/templates/*"],
+  "version": "independent"
+}

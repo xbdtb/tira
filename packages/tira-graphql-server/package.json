@@ -1,0 +1,47 @@
+{
+  "name": "@tira/tira-graphql-server",
+  "version": "1.0.10",
+  "description": "packages/tira-graphql-server",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "npm run clean && npm run compile",
+    "clean": "rimraf dist",
+    "compile": "tsc",
+    "watch-tsc": "tsc -w",
+    "link": "npm link",
+    "unlink": "npm unlink"
+  },
+  "dependencies": {
+    "@tira/tira-errors": "^1.0.3",
+    "@tira/tira-graphql": "^1.0.5",
+    "apollo-server-cache-redis": "^0.1.3",
+    "apollo-server-express": "^2.0.7",
+    "body-parser": "^1.18.3",
+    "compression": "^1.7.3",
+    "connect-redis": "^3.3.3",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "method-override": "^3.0.0",
+    "morgan": "^1.9.1",
+    "passport": "^0.4.0",
+    "passport-http-bearer": "^1.0.1"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "tira",
+    "graphql",
+    "typescript"
+  ],
+  "author": "xbdtb@163.com",
+  "license": "MIT",
+  "homepage": "https://github.com/xbdtb/tira#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xbdtb/tira/tree/master/packages/tira-graphql-server"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

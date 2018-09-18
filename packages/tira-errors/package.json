@@ -1,0 +1,34 @@
+{
+  "name": "@tira/tira-errors",
+  "version": "1.0.3",
+  "description": "packages/tira-errors",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "npm run clean && npm run compile",
+    "clean": "rimraf dist",
+    "compile": "tsc",
+    "watch-tsc": "tsc -w",
+    "link": "npm link",
+    "unlink": "npm unlink"
+  },
+  "dependencies": {
+    "apollo-server-errors": "^2.0.2"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "tira",
+    "graphql",
+    "typescript"
+  ],
+  "author": "xbdtb@163.com",
+  "license": "MIT",
+  "homepage": "https://github.com/xbdtb/tira#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xbdtb/tira/tree/master/packages/tira-errors"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

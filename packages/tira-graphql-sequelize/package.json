@@ -1,0 +1,40 @@
+{
+  "name": "@tira/tira-graphql-sequelize",
+  "version": "1.0.5",
+  "description": "packages/tira-graphql-sequelize",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "npm run clean && npm run compile",
+    "clean": "rimraf dist",
+    "compile": "tsc",
+    "watch-tsc": "tsc -w",
+    "link": "npm link",
+    "unlink": "npm unlink"
+  },
+  "dependencies": {
+    "@tira/tira-graphql": "^1.0.5",
+    "@types/lodash": "^4.14.116",
+    "graphql-relay": "^0.5.5",
+    "graphql-sequelize": "^9.0.1"
+  },
+  "devDependencies": {
+    "lodash": "^4.17.11"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "tira",
+    "graphql",
+    "typescript"
+  ],
+  "author": "xbdtb@163.com",
+  "license": "MIT",
+  "homepage": "https://github.com/xbdtb/tira#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xbdtb/tira/tree/master/packages/tira-graphql-sequelize"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

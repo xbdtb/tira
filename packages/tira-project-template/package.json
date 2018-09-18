@@ -1,0 +1,35 @@
+{
+  "name": "@tira/tira-project-template",
+  "version": "1.0.21",
+  "description": "packages/tira-project-template",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepare": "npm run clean && npm run compile",
+    "clean": "rimraf dist",
+    "compile": "tsc",
+    "watch-tsc": "tsc -w",
+    "link": "npm link",
+    "unlink": "npm unlink"
+  },
+  "dependencies": {
+    "copy-dir": "^0.4.0"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "tira",
+    "graphql",
+    "typescript"
+  ],
+  "author": "xbdtb@163.com",
+  "license": "MIT",
+  "homepage": "https://github.com/xbdtb/tira#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xbdtb/tira/tree/master/packages/tira-project-template"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}

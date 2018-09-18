@@ -1,0 +1,39 @@
+{
+  "name": "@tira/tira-clients",
+  "version": "1.0.4",
+  "description": "packages/tira-errors",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "npm run clean && npm run compile",
+    "clean": "rimraf dist",
+    "compile": "tsc",
+    "watch-tsc": "tsc -w",
+    "link": "npm link",
+    "unlink": "npm unlink"
+  },
+  "dependencies": {
+    "@types/node-fetch": "^2.1.2",
+    "@types/redis": "^2.8.6",
+    "apollo-cache-inmemory": "^1.2.10",
+    "apollo-client": "^2.4.2",
+    "apollo-link-http": "^1.5.4",
+    "node-fetch": "^2.2.0",
+    "redis": "^2.8.0"
+  },
+  "keywords": [
+    "nodejs",
+    "node",
+    "tira",
+    "graphql",
+    "typescript"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/xbdtb/tira#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/xbdtb/tira/tree/master/packages/tira-clients"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
