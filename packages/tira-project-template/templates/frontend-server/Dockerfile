@@ -16,7 +16,6 @@ ADD .npmrc /usr/src/app/
 RUN npm install
 ADD ["postcss.config.js", "webpack.config.js", "/usr/src/app/"]
 ADD client/ /usr/src/app/client/
-ADD config/ /usr/src/app/config/
 RUN npm run build-client-release
 ADD . /usr/src/app/
 RUN npm run compile
