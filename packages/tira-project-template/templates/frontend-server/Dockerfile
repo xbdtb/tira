@@ -19,4 +19,4 @@ ADD client/ /usr/src/app/client/
 RUN npm run build-client-release
 ADD . /usr/src/app/
 RUN npm run compile
-CMD ["npm", "run", "start-server:release"]
+CMD ["npm", "run", "start-server-release"]
