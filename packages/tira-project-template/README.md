@@ -1,4 +1,5 @@
-packages/tira-project-template
+tira-project-template
+
 ```
 1.workspace
 2.frontend-server
