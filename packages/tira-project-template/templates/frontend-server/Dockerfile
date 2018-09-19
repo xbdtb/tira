@@ -14,7 +14,7 @@ ADD package.json /usr/src/app/
 ADD package-lock.json /usr/src/app/
 ADD .npmrc /usr/src/app/
 RUN npm install
-ADD ["postcss.config.js", "webpack.config.js", "/usr/src/app/"]
+ADD [".babelrc", "postcss.config.js", "webpack.config.js", "/usr/src/app/"]
 ADD client/ /usr/src/app/client/
 RUN npm run build-client-release
 ADD . /usr/src/app/
