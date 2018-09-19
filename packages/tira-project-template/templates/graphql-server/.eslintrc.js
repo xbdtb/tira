@@ -47,6 +47,7 @@ module.exports = {
   rules: {
     ...graphqlRules,
     'jsx-quotes': [2, 'prefer-double'],
+    'react/jsx-indent': [0, 2],
     'prettier/prettier': [
       'error',
       {
