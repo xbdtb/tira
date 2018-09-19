@@ -21,7 +21,6 @@ function getEntry() {
         ? [entryItem.path].concat(`webpack-hot-middleware/client?path=${PUBLIC_PATH}__webpack_hmr`)
         : [entryItem.path];
   });
-  console.log(entry);
   return entry;
 }
 
