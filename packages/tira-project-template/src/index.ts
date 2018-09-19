@@ -3,6 +3,12 @@ import * as fs from 'fs';
 // @ts-ignore
 import * as copydir from 'copy-dir';
 
+function renameFile(dir: string, from: string, to: string) {
+  const fromFile = fs.readFileSync(path.resolve(dir, from), 'utf-8');
+  fs.writeFileSync(path.resolve(dir, to), fromFile, 'utf-8');
+  fs.unlinkSync(path.resolve(dir, from));
+}
+
 export function initProject(type: 'workspace' | 'graphql-server' | 'frontend-server' | 'graphql-gateway') {
   const newProjectDir = process.env.PROJECT_DIR || process.cwd();
   const templateDir = path.resolve(__dirname, `../templates/${type}`);
@@ -26,9 +32,8 @@ export function initProject(type: 'workspace' | 'graphql-server' | 'frontend-ser
   packageJson = packageJson.replace(packageNameTag, packageName);
   fs.writeFileSync(packageJsonPath, packageJson, 'utf-8');
 
-  const gitignoreFile = fs.readFileSync(path.resolve(newProjectDir, 'gitignore'), 'utf-8');
-  fs.writeFileSync(path.resolve(newProjectDir, '.gitignore'), gitignoreFile, 'utf-8');
-  fs.unlinkSync(path.resolve(newProjectDir, 'gitignore'));
+  renameFile(newProjectDir, 'gitignore', '.gitignore');
+  renameFile(newProjectDir, 'npmrc', '.npmrc');
 
   console.log('init success');
 }
@@ -69,9 +74,8 @@ export function updateProject() {
     return true;
   });
 
-  const gitignoreFile = fs.readFileSync(path.resolve(newProjectDir, 'gitignore'), 'utf-8');
-  fs.writeFileSync(path.resolve(newProjectDir, '.gitignore'), gitignoreFile, 'utf-8');
-  fs.unlinkSync(path.resolve(newProjectDir, 'gitignore'));
+  renameFile(newProjectDir, 'gitignore', '.gitignore');
+  renameFile(newProjectDir, 'npmrc', '.npmrc');
 
   console.log('update success');
 }
