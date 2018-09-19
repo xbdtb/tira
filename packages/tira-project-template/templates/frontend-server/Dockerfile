@@ -6,7 +6,6 @@ RUN npm install -g npm@6.4.0
 
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
-ENV NODE_ENV production
 ENV SERVER_PORT 80
 EXPOSE 80
 ARG PUBLIC_PATH
