@@ -5,4 +5,5 @@ export const config = {
   systemBearerToken: 'TiraSystemBearerToken',
   serverPort: <number>(process.env.SERVER_PORT || 5000),
   endpoints,
+  updateInterval: 10000,
 };

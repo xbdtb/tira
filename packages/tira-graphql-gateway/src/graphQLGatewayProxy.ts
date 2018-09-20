@@ -55,7 +55,11 @@ export class GraphQLGatewayProxy {
   private apolloServers: { [index: number]: ApolloServer } = {};
   private app?: express.Application;
 
-  constructor(private endpoints: GatewayEndpoint[], private htmlFilePath: string = 'public/graphql/playground.html') {}
+  constructor(
+    private endpoints: GatewayEndpoint[],
+    private htmlFilePath: string = 'public/graphql/playground.html',
+    private updateInterval: number = 10000,
+  ) {}
 
   async applyMiddleware(app: express.Application) {
     this.app = app;
@@ -113,7 +117,7 @@ export class GraphQLGatewayProxy {
           apolloServer['schema'] = schema;
         }
       }
-      setTimeout(this.iniitOrUpdateEndpoints, 5000);
+      setTimeout(this.iniitOrUpdateEndpoints, this.updateInterval);
     } catch (err) {
       console.log(err);
     }

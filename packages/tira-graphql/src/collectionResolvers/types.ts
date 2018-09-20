@@ -1,4 +1,4 @@
-import { createTypeComposer } from '../util';
+import { createTypeComposer } from '../graphQLTool';
 
 export const PaginationInfoType = createTypeComposer({
   description: '分页信息',

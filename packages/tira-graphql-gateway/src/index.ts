@@ -25,6 +25,7 @@ export default class TiraGraphQLGateway {
       cookieMaxAge?: number;
       endpoints: GatewayEndpoint[];
       playgroundHtmlFilePath?: string;
+      updateInterval?: number;
     },
   ) {}
 
@@ -98,7 +99,11 @@ export default class TiraGraphQLGateway {
 
     this.mountControllers(this.options.controllerPath || 'dist/server/controllers');
 
-    const proxy = new GraphQLGatewayProxy(this.options.endpoints, this.options.playgroundHtmlFilePath);
+    const proxy = new GraphQLGatewayProxy(
+      this.options.endpoints,
+      this.options.playgroundHtmlFilePath,
+      this.options.updateInterval,
+    );
     await proxy.applyMiddleware(this.app);
 
     app.use((req: any, res: any, next: any) => {

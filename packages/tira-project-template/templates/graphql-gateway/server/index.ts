@@ -1,5 +1,5 @@
 import TiraGraphQLGateway from '@tira/tira-graphql-gateway';
-import endpoints from './config/endpoints';
+import { config } from './config';
 
-const server = new TiraGraphQLGateway({ endpoints });
+const server = new TiraGraphQLGateway({ endpoints: config.endpoints, updateInterval: config.updateInterval });
 server.start();
