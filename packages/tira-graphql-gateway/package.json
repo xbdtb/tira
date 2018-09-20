@@ -1,6 +1,6 @@
 {
   "name": "@tira/tira-graphql-gateway",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "packages/tira-graphql-gateway",
   "main": "dist/index.js",
   "scripts": {
