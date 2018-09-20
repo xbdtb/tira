@@ -1,6 +1,6 @@
 import * as express from 'express';
 import { playground, TypeComposer } from '@tira/tira-graphql';
-import { ApolloServer } from 'apollo-server-express';
+import { ApolloServer, gql } from 'apollo-server-express';
 import { getRemoteSchema } from '@tira/tira-graphql';
 import { mergeSchemas } from 'graphql-tools';
 import { GraphQLSchema } from 'graphql';
@@ -51,6 +51,12 @@ function applyTCFilter(tc: TypeComposer, filterMap: FilterMap) {
   }
 }
 
+const typeDefs = gql`
+  type Query {
+    notInitialized: Boolean
+  }
+`;
+
 export class GraphQLGatewayProxy {
   private apolloServers: { [index: number]: ApolloServer } = {};
   private app?: express.Application;
@@ -61,12 +67,44 @@ export class GraphQLGatewayProxy {
     private updateInterval: number = 10000,
   ) {}
 
-  async applyMiddleware(app: express.Application) {
+  applyMiddleware(app: express.Application) {
     this.app = app;
-    await this.iniitOrUpdateEndpoints();
+    for (let i = 0; i < this.endpoints.length; i++) {
+      const endpoint = this.endpoints[i];
+
+      this.app.get(
+        endpoint.subPath,
+        playground({ htmlFilePath: this.htmlFilePath, templateParams: { endpoint: endpoint.subPath } }),
+      );
+
+      const apolloServer = new ApolloServer({
+        typeDefs,
+        subscriptions: false,
+        tracing: true,
+        engine: false,
+        introspection: true,
+        playground: {
+          settings: {
+            'general.betaUpdates': false,
+            'editor.cursorShape': 'line',
+            'editor.fontSize': 14,
+            'editor.fontFamily': `'Source Code Pro', 'Consolas', 'Inconsolata', 'Droid Sans Mono', 'Monaco', monospace`,
+            'editor.theme': 'light',
+            'editor.reuseHeaders': true,
+            'prettier.printWidth': 80,
+            'request.credentials': 'include',
+            'tracing.hideTracingResponse': true,
+          },
+        },
+        context: (req: any) => req,
+      });
+      apolloServer.applyMiddleware({ app: this.app, path: endpoint.subPath });
+      this.apolloServers[i] = apolloServer;
+    }
+    this.updateSchemas();
   }
 
-  iniitOrUpdateEndpoints = async () => {
+  updateSchemas = async () => {
     try {
       if (!this.app) {
         return;
@@ -83,41 +121,10 @@ export class GraphQLGatewayProxy {
           applyTCFilter(new TypeComposer(<any>schema.getMutationType()), endpoint.mutationFilter);
         }
 
-        this.app.get(
-          endpoint.subPath,
-          playground({ htmlFilePath: this.htmlFilePath, templateParams: { endpoint: endpoint.subPath } }),
-        );
-
-        if (!this.apolloServers[i]) {
-          const apolloServer = new ApolloServer({
-            schema,
-            subscriptions: false,
-            tracing: true,
-            engine: false,
-            introspection: true,
-            playground: {
-              settings: {
-                'general.betaUpdates': false,
-                'editor.cursorShape': 'line',
-                'editor.fontSize': 14,
-                'editor.fontFamily': `'Source Code Pro', 'Consolas', 'Inconsolata', 'Droid Sans Mono', 'Monaco', monospace`,
-                'editor.theme': 'light',
-                'editor.reuseHeaders': true,
-                'prettier.printWidth': 80,
-                'request.credentials': 'include',
-                'tracing.hideTracingResponse': true,
-              },
-            },
-            context: (req: any) => req,
-          });
-          apolloServer.applyMiddleware({ app: this.app, path: endpoint.subPath });
-          this.apolloServers[i] = apolloServer;
-        } else {
-          const apolloServer = this.apolloServers[i];
-          apolloServer['schema'] = schema;
-        }
+        const apolloServer = this.apolloServers[i];
+        apolloServer['schema'] = schema;
       }
-      setTimeout(this.iniitOrUpdateEndpoints, this.updateInterval);
+      setTimeout(this.updateSchemas, this.updateInterval);
     } catch (err) {
       console.log(err);
     }

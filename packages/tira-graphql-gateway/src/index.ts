@@ -29,9 +29,9 @@ export default class TiraGraphQLGateway {
     },
   ) {}
 
-  public async start() {
+  public start() {
     this.app.disable('x-powered-by');
-    await this.mountMiddlewares(this.app);
+    this.mountMiddlewares(this.app);
     const server = http.createServer(this.app);
     const serverPort = this.options.serverPort || 4000;
     server.listen(serverPort, () => {
@@ -72,7 +72,7 @@ export default class TiraGraphQLGateway {
     }
   }
 
-  async mountMiddlewares(app: any) {
+  mountMiddlewares(app: any) {
     app.use(morgan('dev'));
 
     app.use((req: any, res: any, next: any) => {
@@ -104,7 +104,7 @@ export default class TiraGraphQLGateway {
       this.options.playgroundHtmlFilePath,
       this.options.updateInterval,
     );
-    await proxy.applyMiddleware(this.app);
+    proxy.applyMiddleware(this.app);
 
     app.use((req: any, res: any, next: any) => {
       req.url = '/index.html';
