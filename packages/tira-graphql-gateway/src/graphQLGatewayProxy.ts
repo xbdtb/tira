@@ -124,9 +124,9 @@ export class GraphQLGatewayProxy {
         const apolloServer = this.apolloServers[i];
         apolloServer['schema'] = schema;
       }
-      setTimeout(this.updateSchemas, this.updateInterval);
     } catch (err) {
       console.log(err);
     }
+    setTimeout(this.updateSchemas, this.updateInterval);
   };
 }
