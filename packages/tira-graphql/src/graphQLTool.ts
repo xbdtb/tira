@@ -16,30 +16,34 @@ export async function getRemoteSchema(uri: string): Promise<GraphQLSchema> {
     };
     const middlewareLink = new ApolloLink((operation, forward) => {
       const context = operation.getContext();
-      const req = context.graphqlContext;
-      if (req && req.headers) {
-        operation.setContext({ graphqlContext: context.graphqlContext, headers: { cookie: req.headers['cookie'] } });
+      const graphqlContext = context.graphqlContext;
+      let req: any = null;
+      if (graphqlContext) {
+        req = graphqlContext.req;
+        if (req && req.headers) {
+          operation.setContext({
+            graphqlContext: context.graphqlContext,
+            headers: { cookie: req.headers['cookie'], bearer: req.headers['bearer'] },
+          });
+        }
       }
+
       if (!forward) {
         throw new Error();
       }
       return forward(operation).map((result) => {
         const context = operation.getContext();
         const response = context.response;
-        const responseHeaders = response.headers._headers;
+        const responseHeaders = response.headers;
 
         if (req && responseHeaders) {
           const headers: any = {};
-          const excludeHeaderNames = ['connection', 'content-encoding'];
-          for (const headerName in responseHeaders) {
-            if (
-              responseHeaders[headerName] &&
-              responseHeaders[headerName].length > 0 &&
-              excludeHeaderNames.indexOf(headerName) === -1
-            ) {
-              headers[headerName] = responseHeaders[headerName][0];
+          const excludeHeaderNames = ['connection', 'content-encoding', 'transfer-encoding'];
+          responseHeaders.forEach((value: string, name: string) => {
+            if (excludeHeaderNames.indexOf(name) === -1) {
+              headers[name] = value;
             }
-          }
+          });
           for (const headerName in headers) {
             req.res.header(headerName, headers[headerName]);
           }
