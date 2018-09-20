@@ -1,6 +1,6 @@
 {
   "name": "@tira/tira-cli",
-  "version": "1.0.30",
+  "version": "1.0.31",
   "description": "packages/tira-cli",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@tira/tira-graphql": "^1.0.8",
-    "@tira/tira-project-template": "^1.0.27",
+    "@tira/tira-project-template": "^1.0.28",
     "commander": "^2.18.0"
   },
   "keywords": [

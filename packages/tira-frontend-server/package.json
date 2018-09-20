@@ -1,6 +1,6 @@
 {
   "name": "@tira/tira-frontend-server",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "packages/tira-graphql-server",
   "main": "dist/index.js",
   "scripts": {
