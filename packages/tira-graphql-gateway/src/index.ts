@@ -8,17 +8,12 @@ import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
 import * as methodOverride from 'method-override';
 import * as express from 'express';
-import * as session from 'express-session';
-import * as passport from 'passport';
-import * as redis from 'connect-redis';
-import { ApolloServer } from 'apollo-server-express';
-import { RedisCache as ApolloRedisCache } from 'apollo-server-cache-redis';
-import { GraphQLSchema } from 'graphql';
+import { GatewayEndpoint, GraphQLGatewayProxy } from './graphQLGatewayProxy';
 
-const RedisSessionStore = redis(session);
+export * from './graphQLGatewayProxy';
 
 export default class TiraGraphQLGateway {
-  private app: any;
+  private app = express();
   private rootRouter = express.Router();
 
   constructor(
@@ -28,16 +23,15 @@ export default class TiraGraphQLGateway {
       redisConfig?: { host: string; port: number; password: string };
       sessionSecret?: string;
       cookieMaxAge?: number;
-      schema?: GraphQLSchema;
+      endpoints: GatewayEndpoint[];
+      playgroundHtmlFilePath?: string;
     },
   ) {}
 
-  public start() {
-    const app = express();
-    app.disable('x-powered-by');
-    this.app = app;
-    this.mountMiddlewares(app);
-    const server = http.createServer(app);
+  public async start() {
+    this.app.disable('x-powered-by');
+    await this.mountMiddlewares(this.app);
+    const server = http.createServer(this.app);
     const serverPort = this.options.serverPort || 4000;
     server.listen(serverPort, () => {
       console.log(`Server is running at http://127.0.0.1:${serverPort}.`);
@@ -77,22 +71,8 @@ export default class TiraGraphQLGateway {
     }
   }
 
-  mountMiddlewares(app: any) {
+  async mountMiddlewares(app: any) {
     app.use(morgan('dev'));
-
-    const sessionMiddleware = express.Router();
-    sessionMiddleware.use(
-      session({
-        cookie: { maxAge: this.options.cookieMaxAge || 60000 * 60 * 24 * 30 },
-        store: this.options.redisConfig ? new RedisSessionStore(this.options.redisConfig) : undefined,
-        secret: this.options.sessionSecret || 'tira',
-        resave: true,
-        rolling: true,
-        saveUninitialized: true,
-      }),
-    );
-    sessionMiddleware.use(passport.initialize());
-    sessionMiddleware.use(passport.session());
 
     app.use((req: any, res: any, next: any) => {
       if (req.method.toUpperCase() === 'GET' && req.originalUrl === '/login') {
@@ -116,52 +96,10 @@ export default class TiraGraphQLGateway {
         }),
       );
 
-    app.use((req: any, res: any, next: any) => {
-      if (req && req.headers.authorization && req.headers.authorization.indexOf('Bearer') === 0) {
-        app.use(passport.initialize());
-        passport.authenticate('bearer', { session: false })(req, res, next);
-      } else {
-        sessionMiddleware(req, res, next);
-      }
-    });
     this.mountControllers(this.options.controllerPath || 'dist/server/controllers');
-    app.get('/graphql', (req: any, res: any, next: any) => {
-      if (req.query.extensions) {
-        const extensions = JSON.parse(req.query.extensions);
-        if (extensions.persistedQuery) {
-          return next();
-        }
-      }
-      res.sendFile(path.resolve(path.resolve(process.cwd(), 'public/graphql/playground.html')));
-    });
-    if (this.options.schema) {
-      const apolloServer = new ApolloServer({
-        schema: this.options.schema,
-        subscriptions: false,
-        tracing: true,
-        cacheControl: { defaultMaxAge: 2592000, calculateHttpHeaders: true, stripFormattedExtensions: false },
-        engine: false,
-        persistedQueries: {
-          cache: new ApolloRedisCache(this.options.redisConfig || {}),
-        },
-        introspection: true,
-        playground: {
-          settings: {
-            'general.betaUpdates': false,
-            'editor.cursorShape': 'line',
-            'editor.fontSize': 14,
-            'editor.fontFamily': `'Source Code Pro', 'Consolas', 'Inconsolata', 'Droid Sans Mono', 'Monaco', monospace`,
-            'editor.theme': 'light',
-            'editor.reuseHeaders': true,
-            'prettier.printWidth': 80,
-            'request.credentials': 'include',
-            'tracing.hideTracingResponse': true,
-          },
-        },
-        context: (req: any) => req,
-      });
-      apolloServer.applyMiddleware({ app, path: '/graphql' });
-    }
+
+    const proxy = new GraphQLGatewayProxy(this.options.endpoints, this.options.playgroundHtmlFilePath);
+    await proxy.applyMiddleware(this.app);
 
     app.use((req: any, res: any, next: any) => {
       req.url = '/index.html';

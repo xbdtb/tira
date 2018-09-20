@@ -15,11 +15,12 @@ import { ApolloServer } from 'apollo-server-express';
 import { RedisCache as ApolloRedisCache } from 'apollo-server-cache-redis';
 import { GraphQLSchema } from 'graphql';
 import { InMemoryLRUCache } from 'apollo-server-caching';
+import { playground } from '@tira/tira-graphql';
 
 const RedisSessionStore = redis(session);
 
 export default class TiraGraphQLServer {
-  private app: any;
+  private app = express();
   private rootRouter = express.Router();
 
   constructor(
@@ -34,11 +35,9 @@ export default class TiraGraphQLServer {
   ) {}
 
   public start() {
-    const app = express();
-    app.disable('x-powered-by');
-    this.app = app;
-    this.mountMiddlewares(app);
-    const server = http.createServer(app);
+    this.app.disable('x-powered-by');
+    this.mountMiddlewares(this.app);
+    const server = http.createServer(this.app);
     const serverPort = this.options.serverPort || 4000;
     server.listen(serverPort, () => {
       console.log(`Server is running at http://127.0.0.1:${serverPort}.`);
@@ -125,17 +124,12 @@ export default class TiraGraphQLServer {
         sessionMiddleware(req, res, next);
       }
     });
+
     this.mountControllers(this.options.controllerPath || 'dist/server/controllers');
-    app.get('/graphql', (req: any, res: any, next: any) => {
-      if (req.query.extensions) {
-        const extensions = JSON.parse(req.query.extensions);
-        if (extensions.persistedQuery) {
-          return next();
-        }
-      }
-      res.sendFile(path.resolve(path.resolve(process.cwd(), 'public/graphql/playground.html')));
-    });
+
     if (this.options.schema) {
+      app.get('/graphql', playground({}));
+
       const apolloServer = new ApolloServer({
         schema: this.options.schema,
         subscriptions: false,
@@ -159,7 +153,9 @@ export default class TiraGraphQLServer {
             'tracing.hideTracingResponse': true,
           },
         },
-        context: (req: any) => req,
+        context: (req: any) => {
+          return req;
+        },
       });
       apolloServer.applyMiddleware({ app, path: '/graphql' });
     }

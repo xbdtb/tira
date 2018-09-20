@@ -17,7 +17,7 @@ const proxy = require('express-http-proxy');
 const RedisSessionStore = redis(session);
 
 export default class TiraFrontendServer {
-  private app: any;
+  private app = express();
   private rootRouter = express.Router();
 
   constructor(
@@ -32,11 +32,9 @@ export default class TiraFrontendServer {
   ) {}
 
   public start() {
-    const app = express();
-    app.disable('x-powered-by');
-    this.app = app;
-    this.mountMiddlewares(app);
-    const server = http.createServer(app);
+    this.app.disable('x-powered-by');
+    this.mountMiddlewares(this.app);
+    const server = http.createServer(this.app);
     const serverPort = this.options.serverPort || 4000;
     server.listen(serverPort, () => {
       console.log(`Server is running at http://127.0.0.1:${serverPort}.`);
