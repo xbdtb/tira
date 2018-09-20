@@ -1,6 +1,6 @@
 {
   "name": "@tira/tira-project-template",
-  "version": "1.0.25",
+  "version": "1.0.26",
   "description": "packages/tira-project-template",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
