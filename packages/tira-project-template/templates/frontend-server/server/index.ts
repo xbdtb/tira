@@ -3,7 +3,7 @@ import { config } from './config';
 
 const server = new TiraFrontEndServer({
   serverPort: config.serverPort,
-  graphQLGatewayProxyUrl: config.graphQLFrontendGatewayUrl,
+  graphQLGatewayProxyTargetUrl: config.graphQLFrontendGatewayUrl,
   // redisConfig: config.redis,
 });
 server.start();

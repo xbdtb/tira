@@ -24,7 +24,8 @@ export default class TiraFrontendServer {
     private options: {
       serverPort?: number;
       controllerPath?: string;
-      graphQLGatewayProxyUrl?: string;
+      graphQLGatewayProxyTargetUrl?: string;
+      graphQLProxyPath?: string;
       redisConfig?: { host: string; port: number; password: string };
       sessionSecret?: string;
       cookieMaxAge?: number;
@@ -77,11 +78,19 @@ export default class TiraFrontendServer {
   mountMiddlewares(app: any) {
     app.use(morgan('dev'));
 
-    if (this.options.graphQLGatewayProxyUrl) {
-      const apiPath = Url.parse(this.options.graphQLGatewayProxyUrl).path;
-      app.use(apiPath, (req: any, res: any, next: any) => {
-        proxy(this.options.graphQLGatewayProxyUrl, {
-          proxyReqPathResolver: (req: any) => req.originalUrl,
+    if (this.options.graphQLGatewayProxyTargetUrl) {
+      const targetPath = Url.parse(this.options.graphQLGatewayProxyTargetUrl).path;
+      const proxyPath = this.options.graphQLProxyPath || '/graphql';
+      app.use([proxyPath, targetPath, targetPath + '/*'], (req: any, res: any, next: any) => {
+        console.log(req.originalUrl);
+        proxy(this.options.graphQLGatewayProxyTargetUrl, {
+          proxyReqPathResolver: (req: any) => {
+            if (req.originalUrl === proxyPath) {
+              return req.originalUrl.replace(proxyPath, targetPath);
+            } else {
+              return req.originalUrl;
+            }
+          },
         })(req, res, next);
       });
     }
