@@ -13,7 +13,9 @@ export type GatewayEndpoint = {
 };
 
 export type FilterMap = {
-  [name: string]: FilterMap | string[];
+  $include?: string[];
+  $exclude?: string[];
+  [name: string]: FilterMap | string[] | undefined;
 };
 
 async function mergeRemoteSchemas(targets: string[], log: boolean): Promise<GraphQLSchema> {
