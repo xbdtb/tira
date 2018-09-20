@@ -104,6 +104,7 @@ export default class TiraGraphQLServer {
     });
 
     app.use(express.static(path.resolve(process.cwd(), 'public')));
+    app.get(['/graphql', '/graphql/js/*', '/graphql/css/*'], playground({}));
 
     app
       .use(cookieParser())
@@ -128,8 +129,6 @@ export default class TiraGraphQLServer {
     this.mountControllers(this.options.controllerPath || 'dist/server/controllers');
 
     if (this.options.schema) {
-      app.get('/graphql', playground({}));
-
       const apolloServer = new ApolloServer({
         schema: this.options.schema,
         subscriptions: false,

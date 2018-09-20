@@ -1,10 +1,10 @@
 import * as fs from 'fs';
 
 export function playground({
-  htmlFilePath = 'public/graphql/playground.html',
+  resourceFilePath = 'public/playground',
   templateParams = { endpoint: '/graphql' },
 }: {
-  htmlFilePath?: string;
+  resourceFilePath?: string;
   templateParams?: { [key: string]: string };
 }) {
   return function(req: any, res: any, next: any) {
@@ -14,14 +14,19 @@ export function playground({
         return next();
       }
     }
-    fs.readFile(htmlFilePath, 'utf-8', (err: Error, content: string) => {
+    const filePath = req.url.replace(templateParams.endpoint, '') || '/index.html';
+    fs.readFile(resourceFilePath + filePath, 'utf-8', (err: Error, content: string) => {
       if (err) {
-        console.log(err);
+        res.statusCode = 404;
+        res.end();
         return;
       }
-      for (let key in templateParams) {
-        const value = templateParams[key];
-        content = content.replace('${' + key + '}', value);
+      if (filePath === '/index.html') {
+        for (let key in templateParams) {
+          const value = templateParams[key];
+          const reg = new RegExp('##' + key + '##', 'g');
+          content = content.replace(reg, value);
+        }
       }
       res.send(content);
     });

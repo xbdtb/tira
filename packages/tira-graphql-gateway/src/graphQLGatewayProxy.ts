@@ -63,7 +63,7 @@ export class GraphQLGatewayProxy {
 
   constructor(
     private endpoints: GatewayEndpoint[],
-    private htmlFilePath: string = 'public/graphql/playground.html',
+    private resourceFilePath: string = 'public/playground',
     private updateInterval: number = 10000,
   ) {}
 
@@ -73,8 +73,8 @@ export class GraphQLGatewayProxy {
       const endpoint = this.endpoints[i];
 
       this.app.get(
-        endpoint.subPath,
-        playground({ htmlFilePath: this.htmlFilePath, templateParams: { endpoint: endpoint.subPath } }),
+        [endpoint.subPath, endpoint.subPath + '/js/*', endpoint.subPath + '/css/*'],
+        playground({ resourceFilePath: this.resourceFilePath, templateParams: { endpoint: endpoint.subPath } }),
       );
 
       const apolloServer = new ApolloServer({
