@@ -1,6 +1,6 @@
 {
   "name": "@tira/tira-graphql-server",
-  "version": "1.0.11",
+  "version": "1.0.12",
   "description": "packages/tira-graphql-server",
   "main": "dist/index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   },
   "dependencies": {
     "@tira/tira-errors": "^1.0.4",
-    "@tira/tira-graphql": "^1.0.6",
+    "@tira/tira-graphql": "^1.0.7",
     "apollo-server-cache-redis": "^0.1.3",
     "apollo-server-express": "^2.0.7",
     "body-parser": "^1.18.3",
