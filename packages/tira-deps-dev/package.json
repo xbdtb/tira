@@ -1,6 +1,6 @@
 {
   "name": "@tira/tira-deps-dev",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "packages/tira-deps-dev",
   "dependencies": {
     "@babel/core": "^7.0.1",
