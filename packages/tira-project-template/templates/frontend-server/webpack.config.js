@@ -185,9 +185,7 @@ const webpackConfig = {
 };
 
 if (DEV) {
-  const WriteFilePlugin = require('write-file-webpack-plugin');
   webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
-  webpackConfig.plugins.push(new WriteFilePlugin());
 } else {
   webpackConfig.performance = {
     maxAssetSize: 1200000,
