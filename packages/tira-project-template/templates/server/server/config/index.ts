@@ -16,6 +16,7 @@ export const config = {
   //   host: getServiceHost('redis', 'localhost'),
   //   port: 6379,
   //   password: process.env.REDIS_PASSWORD || 'tira',
+  //   database: '',
   // },
   mysql: {
     host: getServiceHost('mysql', 'localhost'),
