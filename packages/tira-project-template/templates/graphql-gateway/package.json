@@ -42,7 +42,7 @@
     "ignore": []
   },
   "dependencies": {
-    "@tira/tira-graphql-gateway": "^1.0.17",
+    "@tira/tira-graphql-gateway": "^1.0.18",
     "cross-env": "^5.2.0",
     "git-revision-webpack-plugin": "^3.0.3"
   },
@@ -72,5 +72,5 @@
   ],
   "author": "xbdtb@163.com",
   "license": "MIT",
-  "version": "1.0.42"
+  "version": "1.0.43"
 }
