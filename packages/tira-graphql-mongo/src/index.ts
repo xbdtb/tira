@@ -57,7 +57,7 @@ function convertSchemaMap(schemaMap: any, schemaOptions: any = { _id: false }): 
 export function createModel(
   modelName: string,
   schemaMap: any,
-  hook: (schema: mongoose.Schema) => void,
+  hook: (schema: mongoose.Schema) => void = (schema: mongoose.Schema) => {},
 ): mongoose.Model<any> {
   schemaMap._id = {
     $description: '主key',
