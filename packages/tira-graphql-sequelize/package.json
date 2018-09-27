@@ -15,7 +15,9 @@
     "@tira/tira-graphql": "^1.0.8",
     "@types/lodash": "^4.14.116",
     "graphql-relay": "^0.5.5",
-    "graphql-sequelize": "^9.0.1"
+    "graphql-sequelize": "^9.0.1",
+    "mysql2": "^1.6.1",
+    "sequelize": "^4.38.1"
   },
   "devDependencies": {
     "lodash": "^4.17.11"
