@@ -12,14 +12,16 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "@types/graphql": "^14.0.0",
-    "@types/node-fetch": "^2.1.2",
     "apollo-link-http": "^1.5.5",
     "decimal.js": "^10.0.1",
     "graphql": "^14.0.2",
     "graphql-compose": "^5.1.1",
     "graphql-tools": "^3.1.1",
     "node-fetch": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/graphql": "^14.0.0",
+    "@types/node-fetch": "^2.1.2"
   },
   "keywords": [
     "nodejs",
