@@ -42,15 +42,15 @@
     "ignore": []
   },
   "dependencies": {
-    "@tira/tira-clients": "^1.0.5",
-    "@tira/tira-graphql": "^1.0.8",
-    "@tira/tira-graphql-sequelize": "^1.0.9",
-    "@tira/tira-graphql-server": "^1.0.14",
+    "@tira/tira-clients": "^1.0.6",
+    "@tira/tira-graphql": "^1.0.9",
+    "@tira/tira-graphql-sequelize": "^1.0.10",
+    "@tira/tira-graphql-server": "^1.0.15",
     "cross-env": "^5.2.0",
     "git-revision-webpack-plugin": "^3.0.3"
   },
   "devDependencies": {
-    "@tira/tira-cli": "^1.0.35",
+    "@tira/tira-cli": "^1.0.36",
     "@tira/tira-deps-dev": "^1.0.5",
     "@xbdtb/tsc-watch": "^1.0.27",
     "eslint": "^5.5.0",
@@ -76,5 +76,5 @@
   ],
   "author": "xbdtb@163.com",
   "license": "MIT",
-  "version": "1.0.38"
+  "version": "1.0.39"
 }
