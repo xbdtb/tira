@@ -31,7 +31,7 @@ export default class TiraGraphQLServer {
       sessionSecret?: string;
       cookieMaxAge?: number;
       schema?: GraphQLSchema;
-      onServerCreated?: (server: any, app: any) => void;
+      onServerCreated?: (httpServer: any, app: any) => void;
       getContext?: (context: any) => any;
     },
   ) {}

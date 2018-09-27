@@ -26,7 +26,7 @@ export default class TiraGraphQLGateway {
       endpoints: GatewayEndpoint[];
       playgroundHtmlFilePath?: string;
       updateInterval?: number;
-      onServerCreated?: (server: any, app: any) => void;
+      onServerCreated?: (httpServer: any, app: any) => void;
     },
   ) {}
 
