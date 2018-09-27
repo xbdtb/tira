@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>tira</title>
+</head>
+<body>
+<div id="loading" style="min-height: 100%; height: 100%;"></div>
+<div id="root" style="min-height: 100%;height: 100%;"></div>
+<script>
+  try {
+    window.isSupportWebP = (document.createElement('canvas').toDataURL('image/webp').indexOf('data:image/webp') === 0);
+  } catch (err) {
+    window.isSupportWebP = false;
+  }
+</script>
+</body>
+</html>
