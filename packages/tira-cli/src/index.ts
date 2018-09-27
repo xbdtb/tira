@@ -10,7 +10,7 @@ export function cli() {
     .description('init a new project in current directory')
     .option(
       '-t, --type [type]',
-      'Project type: workspace|graphql-server|frontend-server|graphql-gateway',
+      'Project type: workspace|graphql-server|frontend-server|server|graphql-gateway',
       /^(workspace|graphql-server|frontend-server|graphql-gateway)$/i,
       'workspace',
     )
