@@ -35,7 +35,7 @@ export default class TiraServer {
       sessionSecret?: string;
       cookieMaxAge?: number;
       schema?: GraphQLSchema;
-      onServerCreated?: (server: any) => void;
+      onServerCreated?: (server: any, app: any) => void;
       getContext?: (context: any) => any;
     },
   ) {}
@@ -49,7 +49,7 @@ export default class TiraServer {
       console.log(`Server is running at http://127.0.0.1:${serverPort}.`);
     });
     if (this.options.onServerCreated) {
-      this.options.onServerCreated(server);
+      this.options.onServerCreated(server, this.app);
     }
   }
 
