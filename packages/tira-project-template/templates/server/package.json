@@ -51,7 +51,7 @@
     "@tira/tira-clients": "^1.0.6",
     "@tira/tira-graphql": "^1.0.9",
     "@tira/tira-graphql-sequelize": "^1.0.10",
-    "@tira/tira-server": "^1.0.3",
+    "@tira/tira-server": "^1.0.4",
     "cross-env": "^5.2.0",
     "git-revision-webpack-plugin": "^3.0.3"
   },
@@ -93,5 +93,5 @@
   ],
   "author": "xbdtb@163.com",
   "license": "MIT",
-  "version": "1.0.5"
+  "version": "1.0.6"
 }
