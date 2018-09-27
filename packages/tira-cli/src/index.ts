@@ -11,7 +11,7 @@ export function cli() {
     .option(
       '-t, --type [type]',
       'Project type: workspace|graphql-server|frontend-server|server|graphql-gateway',
-      /^(workspace|graphql-server|frontend-server|graphql-gateway)$/i,
+      /^(workspace|graphql-server|frontend-server|server|graphql-gateway)$/i,
       'workspace',
     )
     .action((cmd) => {
