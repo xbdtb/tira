@@ -1,5 +1,5 @@
 {
-  "name": "PACKAGE_NAME-server",
+  "name": "PACKAGE_NAME_server",
   "private": true,
   "project-type": "server",
   "scripts": {
