@@ -43,6 +43,7 @@
   },
   "dependencies": {
     "@tira/tira-clients": "^1.0.5",
+    "@tira/tira-graphql": "^1.0.8",
     "@tira/tira-graphql-sequelize": "^1.0.8",
     "@tira/tira-graphql-server": "^1.0.14",
     "cross-env": "^5.2.0",
