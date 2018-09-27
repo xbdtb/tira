@@ -26,6 +26,7 @@ export default class TiraGraphQLGateway {
       endpoints: GatewayEndpoint[];
       playgroundHtmlFilePath?: string;
       updateInterval?: number;
+      onServerCreated?: (server: any) => void;
     },
   ) {}
 
@@ -37,6 +38,9 @@ export default class TiraGraphQLGateway {
     server.listen(serverPort, () => {
       console.log(`Server is running at http://127.0.0.1:${serverPort}.`);
     });
+    if (this.options.onServerCreated) {
+      this.options.onServerCreated(server);
+    }
   }
 
   private mountControllers(controllerPath: string, baseUrlPath: string = '/') {

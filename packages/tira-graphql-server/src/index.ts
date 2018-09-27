@@ -31,6 +31,8 @@ export default class TiraGraphQLServer {
       sessionSecret?: string;
       cookieMaxAge?: number;
       schema?: GraphQLSchema;
+      onServerCreated?: (server: any) => void;
+      getContext?: (context: any) => any;
     },
   ) {}
 
@@ -42,6 +44,9 @@ export default class TiraGraphQLServer {
     server.listen(serverPort, () => {
       console.log(`Server is running at http://127.0.0.1:${serverPort}.`);
     });
+    if (this.options.onServerCreated) {
+      this.options.onServerCreated(server);
+    }
   }
 
   private mountControllers(controllerPath: string, baseUrlPath: string = '/') {
@@ -140,8 +145,12 @@ export default class TiraGraphQLServer {
         },
         introspection: true,
         playground: false,
-        context: (req: any) => {
-          return req;
+        context: (context: any) => {
+          if (this.options.getContext) {
+            return this.options.getContext(context);
+          } else {
+            return context;
+          }
         },
       });
       apolloServer.applyMiddleware({ app, path: '/graphql' });
