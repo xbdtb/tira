@@ -54,7 +54,7 @@ npm run watch-tsc
 
 2.graphql support based on apollo
 
-3.support graphql gateway and make it possible to developing large micro service projects
+3.support graphql gateway and make it possible to develop large micro service projects
 
 4.simple way to convert sequelize models and relations to graphql types
 
