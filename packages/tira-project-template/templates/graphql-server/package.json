@@ -50,7 +50,7 @@
     "git-revision-webpack-plugin": "^3.0.3"
   },
   "devDependencies": {
-    "@tira/tira-cli": "^1.0.37",
+    "@tira/tira-cli": "^1.0.38",
     "@tira/tira-deps-dev": "^1.0.6",
     "@xbdtb/tsc-watch": "^1.0.27",
     "eslint": "^5.5.0",
@@ -76,5 +76,5 @@
   ],
   "author": "xbdtb@163.com",
   "license": "MIT",
-  "version": "1.0.44"
+  "version": "1.0.45"
 }
