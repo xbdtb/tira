@@ -2,7 +2,6 @@ import * as program from 'commander';
 import { initProject, updateProject } from '@tira/tira-project-template';
 import { generateFrontendSchema, generateBackendSchema } from './schemaGenerator';
 
-//
 export function cli() {
   program.version('0.1.0', '-v').description('tira cli tool');
 
