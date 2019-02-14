@@ -1,4 +1,9 @@
 {
   "packages": ["packages/*", "packages/tira-project-template/templates/*"],
-  "version": "independent"
+  "version": "independent",
+  "command": {
+    "publish": {
+      "push": false
+    }
+  }
 }
