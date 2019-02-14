@@ -12,7 +12,7 @@
     "tslint-fix": "tslint --fix \"**/*.{ts,tsx}\"",
     "prettier": "prettier-check \"**/*.{json,yaml,yml,md,css,scss,less}\"",
     "prettier-fix": "prettier --write \"**/*.{json,yaml,yml,md,css,scss,less}\"",
-    "publish": "lerna publish --registry=https://registry.npmjs.com",
+    "publish": "lerna publish --registry=http://npm.hnshituo.com",
     "precommit": "lint-staged",
     "clean": "lerna clean -y && lerna run clean && rimraf node_modules",
     "bootstrap": "lerna bootstrap --hoist",
