@@ -1,6 +1,6 @@
 {
   "name": "@tira/tira-graphql-mongo",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "packages/tira-graphql-mongo",
   "main": "dist/index.js",
   "scripts": {
@@ -12,7 +12,7 @@
     "unlink": "npm unlink"
   },
   "dependencies": {
-    "@tira/tira-graphql": "^1.0.10",
+    "@tira/tira-graphql": "^1.0.11",
     "graphql-compose-mongoose": "^5.1.0",
     "mongoose": "^5.2.17",
     "mongoose-delete": "^0.4.0"

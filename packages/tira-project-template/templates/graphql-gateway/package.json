@@ -42,12 +42,12 @@
     "ignore": []
   },
   "dependencies": {
-    "@tira/tira-graphql-gateway": "^1.0.20",
+    "@tira/tira-graphql-gateway": "^1.0.21",
     "cross-env": "^5.2.0",
     "git-revision-webpack-plugin": "^3.0.3"
   },
   "devDependencies": {
-    "@tira/tira-cli": "^1.0.41",
+    "@tira/tira-cli": "^1.0.42",
     "@tira/tira-deps-dev": "^1.0.6",
     "@xbdtb/tsc-watch": "^1.0.27",
     "eslint": "^5.5.0",
@@ -72,5 +72,5 @@
   ],
   "author": "xbdtb@163.com",
   "license": "MIT",
-  "version": "1.0.49"
+  "version": "1.0.50"
 }
